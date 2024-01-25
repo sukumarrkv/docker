@@ -1,0 +1,33 @@
+version: '3'
+services:
+  product-service:
+    container_name: productservice
+    image: product-app01
+    restart: on-failure
+    environment:
+      WAIT_HOSTS: mysql:3306
+    ports:
+      - 9002:9090
+    depends_on:
+      - docker-mysql
+      - coupon-service
+  coupon-service:
+    container_name: couponservice
+    image: coupon-app01
+    restart: on-failure
+    ports:
+      - 9001:9091
+    environment:
+      WAIT_HOSTS: mysql:3306
+    depends_on:
+      - docker-mysql
+  docker-mysql:
+    container_name: docker-mysql
+    image: mysql
+    restart: always
+    ports:
+      - 6666:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: test1234
+      MYSQL_DATABASE: mydb
+      MYSQL_ROOT_HOSTS: "%"

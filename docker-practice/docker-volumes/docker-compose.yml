@@ -1,0 +1,11 @@
+version: '3'
+services:
+    nginx-service:
+        container_name: webserver
+        image: nginx
+        ports:
+           - 8080:80
+        volumes:
+            - myvol:/test
+volumes:
+   myvol:
