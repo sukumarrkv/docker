@@ -10,4 +10,9 @@ public class DockerController {
 	public String message() {
 		return "Hello from Spring boot docker application";
 	}
+	
+	@GetMapping("/v2/message")
+	public String messageFromVersion2() {
+		return "Hello from Spring boot docker application from version 2";
+	}
 }
