@@ -1,6 +1,9 @@
 package com.sukumar.customerservice.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -20,13 +23,13 @@ public class CustomerController {
 	private CustomerService  customerService;
 	
 	@GetMapping("/get/{customerId}")
-	public CustomerResponse getCustomer(@PathVariable Long customerId) {
-		return customerService.getCustomer(customerId);
+	public ResponseEntity<CustomerResponse> getCustomer(@PathVariable("customerId") Long customerId) {
+		return new ResponseEntity<CustomerResponse>(customerService.getCustomer(customerId),HttpStatus.OK);
 	}
 	
 	@PostMapping("/save")
-	public CustomerResponse saveCustomer(@RequestBody Customer customer) {
-		return customerService.saveCustomer(customer);
+	public ResponseEntity<CustomerResponse> saveCustomer(@RequestBody Customer customer) {
+		return new ResponseEntity<CustomerResponse>(customerService.saveCustomer(customer), HttpStatus.CREATED);
 	}
 
 }
