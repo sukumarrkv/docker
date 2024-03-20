@@ -19,6 +19,8 @@ public class Account implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long accountId;
+	
+	private Long accountNumber;
 
 	private String type;
 
@@ -32,6 +34,14 @@ public class Account implements Serializable {
 
 	public void setAccountId(Long accountId) {
 		this.accountId = accountId;
+	}
+
+	public Long getAccountNumber() {
+		return accountNumber;
+	}
+
+	public void setAccountNumber(Long accountNumber) {
+		this.accountNumber = accountNumber;
 	}
 
 	public String getType() {
@@ -58,4 +68,5 @@ public class Account implements Serializable {
 		this.customerId = customerId;
 	}
 
+	
 }
