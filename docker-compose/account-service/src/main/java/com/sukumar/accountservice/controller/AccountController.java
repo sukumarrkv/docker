@@ -1,6 +1,10 @@
 package com.sukumar.accountservice.controller;
 
+import java.math.BigDecimal;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -27,5 +31,11 @@ public class AccountController {
 	@PostMapping("/save")
 	public AccountResponse saveAccount(@RequestBody Account account) {
 		return accountService.saveAccount(account);
+	}
+	
+	@GetMapping("/payment/status/{accountnumber}/{amount}")
+	public ResponseEntity<String> getPaymentStatus(@PathVariable("accountnumber") Long accountNumber,
+			@PathVariable("amount") BigDecimal amount) {
+		return new ResponseEntity<String>(accountService.getPaymentStatus(accountNumber, amount), HttpStatus.OK);
 	}
 }
