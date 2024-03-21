@@ -22,17 +22,17 @@ public class AccountController {
 
 	@Autowired
 	private AccountService accountService;
-	
+
 	@GetMapping("/get/{accountid}")
-	public AccountResponse getAccount(@PathVariable("accountid") Long accountId) {
-		return accountService.getAccount(accountId);
+	public ResponseEntity<AccountResponse> getAccount(@PathVariable("accountid") Long accountId) {
+		return new ResponseEntity<AccountResponse>(accountService.getAccount(accountId), HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/save")
-	public AccountResponse saveAccount(@RequestBody Account account) {
-		return accountService.saveAccount(account);
+	public ResponseEntity<AccountResponse> saveAccount(@RequestBody Account account) {
+		return new ResponseEntity<AccountResponse>(accountService.saveAccount(account), HttpStatus.CREATED);
 	}
-	
+
 	@GetMapping("/payment/status/{accountnumber}/{amount}")
 	public ResponseEntity<String> getPaymentStatus(@PathVariable("accountnumber") Long accountNumber,
 			@PathVariable("amount") BigDecimal amount) {
